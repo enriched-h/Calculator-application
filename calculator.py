@@ -1,15 +1,16 @@
 import os
 
 def calculator():
-        try:
+        try:   # Set the user input number to be float, even id the user can it handle an int too
                num1 = float(input("Please enter your first number\n"))
                operator = input("Please enter a valid operand(+ or - or / or *)\n")
                num2 = float(input("Please enter your second number\n"))
                
-
+               # Open the Equation file so we can save the equations
                with open('equation_file.txt', 'a+') as write_equaton_file:
                     write_equaton_file.write("")
                     try:
+                      # Addition sum
                       if  operator == "+":
                         add_result = num1 + num2
                         add_equation = (str(num1) + " + " + str(num2) + " = "  + str(add_result))
@@ -17,7 +18,8 @@ def calculator():
                         print(add_equation)            
                         return
               
-
+                      
+                      # Subtraction sum
                       elif operator == "-":
                          sub_result = num1 - num2
                          sub_equation = " "
@@ -27,6 +29,7 @@ def calculator():
                          return
 
                     
+                      # Division sum
                       elif  operator == "/" :
                           div_result = num1 / num2
                           div_equation = (str(num1) + " / " + str(num2) + " = " + str(div_result))
@@ -34,6 +37,7 @@ def calculator():
                           print(div_equation)
                           return
                    
+                      # Multiplication sum
                       elif operator == "*":
                          num1 * num2
                          mul_result = num1 * num2
@@ -45,13 +49,16 @@ def calculator():
             
 
             
+                      # Throw an error if user does not enter a valid operator
                       else: operator != "+" or operator != "-" or operator != "/" or operator != "*"
                       print("You have not entered a valid operator ")
                       return
+                    # Return a ZeroDivisionError when user divides by 0 
                     except ZeroDivisionError:
                            print(ZeroDivisionError)
                            print("You cannot divide by zero")
-                           
+
+        # Return a ValueError when a user does not enter a number                 
         except ValueError:
                       print(ValueError)
                       print("You have entered an invalid character\n")
@@ -60,6 +67,7 @@ def calculator():
 def view_previous_calc():
                   user_file_name = input("Please enter the name of the file ")
                   if user_file_name != "equation_file":
+                         # If file not 'equation file'
                          print("No such file exists")
                   else:
                        # View previous calculations
